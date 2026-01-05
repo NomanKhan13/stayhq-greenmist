@@ -43,46 +43,40 @@ const page = () => {
         {reservations.map((reservation) => (
           <div
             key={reservation.id}
-            className="p-6 bg-muted/30 hover:bg-muted/50 transition-colors"
+            className="p-6 bg-card/40 hover:bg-card/60 transition-colors"
           >
             <div className="flex justify-between items-start mb-4">
               <div>
-                <p className="text-xs uppercase tracking-widest font-light text-muted-foreground mb-2">
+                <p className="text-xs uppercase tracking-widest text-secondary-foreground/90 mb-2">
                   Property
                 </p>
                 <h3 className="font-serif text-lg font-light text-foreground">
                   {reservation.property}
                 </h3>
               </div>
-              <span className="text-xs px-2 py-1 bg-primary/10 text-primary font-light">
+              <span className="text-xs px-2 py-1 bg-accent text-accent-foreground">
                 {reservation.status}
               </span>
             </div>
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div>
-                <p className="text-xs uppercase tracking-widest font-light text-muted-foreground mb-1">
+                <p className="text-xs uppercase tracking-widest text-secondary-foreground/90 mb-1">
                   Check-in
                 </p>
-                <p className="font-light text-foreground">
-                  {reservation.checkIn}
-                </p>
+                <p className="text-foreground">{reservation.checkIn}</p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest font-light text-muted-foreground mb-1">
+                <p className="text-xs uppercase tracking-widest text-secondary-foreground/90 mb-1">
                   Check-out
                 </p>
-                <p className="font-light text-foreground">
-                  {reservation.checkOut}
-                </p>
+                <p className="text-foreground">{reservation.checkOut}</p>
               </div>
             </div>
-            <div className="pt-4 border-t border-muted">
-              <p className="text-xs uppercase tracking-widest font-light text-muted-foreground mb-1">
+            <div className="pt-4 border-t border-secondary">
+              <p className="text-xs uppercase tracking-widest text-secondary-foreground/90 mb-1">
                 Room Type
               </p>
-              <p className="font-light text-foreground">
-                {reservation.roomType}
-              </p>
+              <p className="text-foreground">{reservation.roomType}</p>
             </div>
           </div>
         ))}

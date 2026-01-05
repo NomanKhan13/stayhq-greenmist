@@ -1,14 +1,16 @@
-"use client";
-
+import { auth } from "@/app/_lib/auth";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 // import { Button } from "@/components/ui/button"
 // import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 // import { User, LogOut } from "lucide-react"
 
-export default function Header() {
+export default async function Header() {
+  const session = await auth();
+  console.log(session?.user?.image);
   return (
-    // <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-    <header>
+    // <header className="sticky top-0 z-50 border-b border-border">
+    <header className="bg-linear-to-b from-background/25 to to-background/10 backdrop-blur-md supports-backdrop-filter:bg-linear-to-b supports-backdrop-filter:from-background/25 to supports-backdrop-filter:to-background/10">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 relative z-10">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
@@ -21,7 +23,7 @@ export default function Header() {
         </Link>
 
         {/* Navigation */}
-        <div className="hidden gap-8 md:flex">
+        <div className="hidden gap-8 md:flex items-center">
           <Link
             href="/"
             className="text-sm font-medium text-foreground/80 transition-colors hover:underline"
@@ -46,12 +48,39 @@ export default function Header() {
           >
             Experiences
           </Link>
-          <Link
+          <Avatar asChild className="cursor-pointer">
+            <Link href="/account" aria-label="Go to account">
+              <AvatarImage
+                src={session?.user?.image}
+                referrerPolicy="no-referrer"
+              />
+              <AvatarFallback className="bg-accent/30 hover:bg-accent/50 transition-colors">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-log-in-icon lucide-log-in"
+                >
+                  <path d="m10 17 5-5-5-5" />
+                  <path d="M15 12H3" />
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                </svg>
+              </AvatarFallback>
+            </Link>
+          </Avatar>
+
+          {/* <Link
             href="/account"
             className="text-sm font-medium text-foreground/80 transition-colors hover:underline"
           >
             Noman Khan
-          </Link>
+          </Link> */}
         </div>
 
         {/* Account Button */}

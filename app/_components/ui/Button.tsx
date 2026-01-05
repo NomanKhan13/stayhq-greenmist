@@ -17,7 +17,7 @@ const Button = ({
     return (
       <Link
         href={link}
-        className="text-center px-8 py-3 bg-transparent text-btn-text tracking-wide border border-white/40 hover:brightness-90 transition-opacity cursor-pointer"
+        className="text-center px-8 py-3 bg-transparent tracking-wide border border-white/40 hover:brightness-90 transition-opacity cursor-pointer"
       >
         {children}
       </Link>
@@ -28,10 +28,10 @@ const Button = ({
     <Link
       href={link}
       className={clsx(
-        "text-center px-8 py-3 text-btn-text tracking-wide hover:opacity-90 transition-opacity",
+        "text-center px-8 py-3 tracking-wide hover:opacity-90 transition-opacity",
         isDisabled
           ? "bg-border pointer-events-none cursor-not-allowed"
-          : "bg-primary cursor-pointer"
+          : "bg-primary/90 cursor-pointer"
       )}
     >
       {children}

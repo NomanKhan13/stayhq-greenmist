@@ -19,7 +19,7 @@ const AddOnsSelector = () => {
           <div
             key={addon.id}
             className={clsx(
-              "flex items-center justify-between p-4 bg-card/60 hover:bg-card/80 transition-colors cursor-pointer",
+              "flex items-center justify-between p-4 bg-card/40 hover:bg-card/60 transition-colors cursor-pointer",
               !isValidDateRange && "pointer-events-none"
             )}
             onClick={() => handleAddOnToggle(addon)}
@@ -34,7 +34,7 @@ const AddOnsSelector = () => {
               />
               <div>
                 <p className="text-foreground">{addon.name}</p>
-                <p className="text-sm text-foreground-secondary">
+                <p className="text-sm text-secondary-foreground/90">
                   {addon.description}
                 </p>
               </div>

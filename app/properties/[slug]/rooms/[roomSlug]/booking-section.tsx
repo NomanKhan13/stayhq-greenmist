@@ -119,7 +119,7 @@ const BookingSection = ({ pricePerNight }: { pricePerNight: number }) => {
       id="#booking-section"
       className="px-6 py-20 border-t border-border/20"
     >
-      <div className="grid lg:grid-cols-3 gap-12">
+      <div className="grid lg:grid-cols-3 gap-12 relative">
         {/* Dates & Add-ons */}
         <div className="md:col-span-2 space-y-16">
           {/* Date Selection */}

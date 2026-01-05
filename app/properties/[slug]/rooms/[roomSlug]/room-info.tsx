@@ -41,26 +41,26 @@ const RoomInfo = ({ room }: { room: RoomDetail }) => {
           <h1 className="hidden sm:block font-serif text-3xl md:text-4xl font-light tracking-tight mb-4 text-balance">
             {room.name}
           </h1>
-          <p className="text text-foreground-secondary mb-8 leading-relaxed text-pretty">
+          <p className="text text-secondary-foreground/90 mb-8 leading-relaxed text-pretty">
             {room.description}
           </p>
 
           {/* Key Details */}
           <div className="flex flex-col sm:flex-row justify-between sm:justify-start gap-8 pb-8 border-b border-border/20">
             <div>
-              <p className="text-xs uppercase tracking-widest text-foreground mb-2">
+              <p className="text-xs uppercase tracking-widest text-secondary-foreground/90 mb-2">
                 Ideal for
               </p>
-              <p className="text-lg">{room.idealFor}</p>
+              <p className="font-medium">{room.idealFor}</p>
             </div>
 
             <div>
-              <p className="text-xs uppercase tracking-widest text-foreground mb-2">
+              <p className="text-xs uppercase tracking-widest text-secondary-foreground/90 mb-2">
                 From
               </p>
-              <p className="font-serif font-light text-3xl text-foreground">
+              <p className="font-serif font-light text-2xl text-foreground">
                 ${room.pricePerNight}
-                <span className="text-foreground-muted text-base">
+                <span className="text-secondary-foreground/90 text-base">
                   {" "}
                   / night
                 </span>

@@ -1,5 +1,7 @@
 import SectionHeader from "../_components/SectionHeader";
 import Button from "../_components/ui/Button";
+import CTABanner from "../_components/ui/cta-banner";
+import InformationCard from "../_components/ui/InformationCard";
 
 const experiences = [
   {
@@ -53,36 +55,18 @@ export default function Experiences() {
       <section className="px-6 pb-20 md:pb-32">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {experiences.map((experience) => (
-            <div
+            <InformationCard
               key={experience.title}
-              className="flex flex-col p-8 dark:bg-card/40 bg-card hover:bg-card/60 transition-colors"
-            >
-              <p className="text-xs uppercase tracking-widest text-foreground-secondary mb-3">
-                {experience.category}
-              </p>
-
-              <h3 className="text-2xl font-light tracking-tight mb-4">
-                {experience.title}
-              </h3>
-              <p className="text-base text-foreground-secondary leading-relaxed">
-                {experience.description}
-              </p>
-            </div>
+              about={experience.category}
+              value={experience.title}
+              detail={experience.description}
+            />
           ))}
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="dark:bg-card/40 bg-card py-20 px-6">
-        <div className="mx-auto text-center">
-          <p className="font-serif text-3xl font-light tracking-tight mb-8 text-balance">
-            Ready to Escape
-          </p>
-          <Button link="/properties" variant="filled" isDisabled={false}>
-            Explore Our Properties
-          </Button>
-        </div>
-      </section>
+      <CTABanner title="Ready to Escape" btnText="Explore Our Properties" />
     </main>
   );
 }

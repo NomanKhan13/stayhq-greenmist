@@ -1,9 +1,10 @@
 import Image from "next/image";
-import Button from "../_components/ui/Button";
 import { SUPABASE_IMAGE_BASE_URL } from "@/constants";
 import clsx from "clsx";
 import PropertyAndRoomWrapper from "../_components/ui/property-and-room-wrapper";
 import { getProperties } from "../_lib/rooms";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 type PropertyProps = {
   name: string;
@@ -38,13 +39,13 @@ const PropertyGrid = async () => {
               </div>
             </div>
             <div className={clsx("grid", idx % 2 !== 0 ? "md:order-2" : "")}>
-              <p className="text-sm text-foreground-secondary mb-2 uppercase tracking-widest">
+              <p className="text-xs text-muted-foreground mb-2 uppercase tracking-widest">
                 {property.location}
               </p>
-              <h2 className="hidden sm:block font-serif text-3xl font-light tracking-tight mb-6 text-balance">
+              <h2 className="hidden sm:block font-serif text-2xl lg:text-3xl font-light tracking-tight mb-6 text-balance">
                 {property.name}
               </h2>
-              <p className="text-lg text-foreground-secondary mb-8 text-pretty leading-relaxed">
+              <p className="text-lg text-secondary-foreground/90 mb-8 text-pretty leading-relaxed max-w-prose">
                 {property.description}
               </p>
 
@@ -56,7 +57,7 @@ const PropertyGrid = async () => {
                   {property.highlights.map((feature: string) => (
                     <span
                       key={feature}
-                      className="px-4 py-2 border border-border text-sm hover:bg-card transition-colors"
+                      className="p-2 border-b border-border text-sm hover:bg-card transition-colors"
                     >
                       {feature}
                     </span>
@@ -65,11 +66,13 @@ const PropertyGrid = async () => {
               </div>
 
               <Button
-                variant="filled"
-                link={`/properties/${property.slug}/rooms`}
-                isDisabled={false}
+                size="lg"
+                className="rounded-none py-6 px-8 text-base"
+                asChild
               >
-                View Stays & Rates
+                <Link href={`/properties/${property.slug}/rooms`}>
+                  View Stays & Rates
+                </Link>
               </Button>
             </div>
           </PropertyAndRoomWrapper>

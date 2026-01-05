@@ -1,6 +1,7 @@
 import Image from "next/image";
 import heroBg from "@/public/hero2.jpg";
-import Button from "./_components/ui/Button";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -15,56 +16,43 @@ export default function Home() {
           className="object-cover object-top"
           priority
         />
-        <div className="absolute inset-0 bg-black/40" />
+
+        <div className="absolute inset-0 bg-linear-to-b from-black/30 to-black/30" />
       </div>
 
+      {/* Content */}
       <div className="max-w-3xl mx-auto px-6 text-center space-y-6">
-        <h1 className="text-5xl md:text-7xl font-light tracking-tight text-btn-text text-balance">
-          Calm Luxury in Nature
+        <h1 className="text-5xl md:text-7xl font-light text-stone-50 text-balance">
+          Calm Luxury, Curated for Quiet Souls
         </h1>
-        <p className="text-lg md:text-xl text-btn-text/75 max-w-2xl mx-auto leading-relaxed text-pretty">
-          Escape to thoughtfully designed boutique hotels where nature meets
-          hospitality. Your sanctuary awaits.
+
+        <p className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed text-stone-50/75 text-pretty">
+          Boutique stays nestled in misty hills, forests, and slow mornings —
+          designed for rest, privacy, and presence.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-          <Button variant="filled" link="properties" isDisabled={false}>
-            Explore Properties
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+          <Button
+            size="lg"
+            className="rounded-none py-6 px-8 text-base"
+            asChild
+          >
+            <Link href="/properties">Explore Luxury Properties</Link>
           </Button>
-          <Button variant="outline" link="about" isDisabled={false}>
-            Learn more
+
+          <Button
+            size="lg"
+            variant="ghost"
+            className="rounded-none py-6 px-8 text-stone-50 border border-stone-50/40 hover:bg-accent/30"
+            asChild
+          >
+            <Link href="/about">Why GreenMist?</Link>
           </Button>
         </div>
       </div>
     </section>
   );
 }
-
-// "use client";
-
-// import { Calendar } from "@/components/ui/calendar";
-// import { useReservation } from "@/app/_components/reservation-context";
-// import useMediaQuery from "@/app/_components/use-media-query";
-
-// export default function BookingDatePicker() {
-//   const { dateRange, setDateRange } = useReservation();
-//   const isDesktop = useMediaQuery("(min-width: 768px)");
-
-//   return (
-//     <div className="flex min-w-0 flex-col gap-2 ">
-//       <Calendar
-//         mode="range"
-//         showOutsideDays={false}
-//         defaultMonth={dateRange?.from}
-//         selected={dateRange}
-//         onSelect={setDateRange}
-//         numberOfMonths={isDesktop ? 2 : 1}
-//         min={2}
-//         max={20}
-//         className="border border-border/50 bg-card/60 w-full max-w-[500px]"
-//       />
-//     </div>
-//   );
-// }
 
 // @import "tailwindcss";
 

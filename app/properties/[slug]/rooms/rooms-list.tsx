@@ -1,10 +1,9 @@
 import aboutHill from "@/public/greenmist-hill-retreat.jpg";
 import Image from "next/image";
-import Button from "@/app/_components/ui/Button";
 import PropertyAndRoomWrapper from "@/app/_components/ui/property-and-room-wrapper";
 import { getRoomsByProperty } from "@/app/_lib/rooms";
-// import { PROPERTY_OPTIONS } from "@/constants";
-// import RoomFilter from "./room-filter";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 async function RoomsList({
   propertyId,
@@ -43,46 +42,45 @@ async function RoomsList({
               className={`flex flex-col ${index % 2 !== 0 ? "md:order-1" : ""}`}
             >
               {/* Header */}
-              <div className="flex items-start justify-between gap-4 mb-6">
-                <h3 className="font-serif text-2xl lg:text-3xl font-light tracking-tight text-balance">
-                  {room.name}
-                </h3>
-              </div>
+              <h3 className="font-serif mb-6 text-2xl lg:text-3xl font-light tracking-tight text-balance">
+                {room.name}
+              </h3>
 
               {/* Description */}
-              <p className="text-lg truncate text-foreground-secondary mb-8 leading-relaxed text-pretty">
+              <p className="text-lg truncate text-secondary-foreground/90 mb-8 leading-relaxed text-pretty max-w-prose">
                 {room.description}
               </p>
 
-              {/* Room Details */}
-              <div className="flex justify-between sm:justify-start gap-12 pb-8 border-b border-border/20">
+              <div className="flex flex-col sm:flex-row justify-between sm:justify-start gap-8 pb-8 border-b border-border/20">
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-foreground mb-2">
+                  <p className="text-xs uppercase tracking-widest text-secondary-foreground/90 mb-2">
                     Ideal for
                   </p>
-                  <p className="font-serif font-light tracking-wider text-lg">
-                    {room.idealFor}
-                  </p>
+                  <p className="font-medium">{room.idealFor}</p>
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-foreground mb-2">
-                    Nightly Rate
+                  <p className="text-xs uppercase tracking-widest text-secondary-foreground/90 mb-2">
+                    From
                   </p>
-                  <p className="font-serif font-light text-3xl text-foreground">
+                  <p className="font-serif font-light text-2xl text-foreground">
                     ${room.pricePerNight}
+                    <span className="text-secondary-foreground/90 text-base">
+                      {" "}
+                      / night
+                    </span>
                   </p>
                 </div>
               </div>
 
-              {/* CTA */}
-              {/* add link later */}
               <Button
-                variant="filled"
-                link={`/properties/${propertySlug}/rooms/${room.slug}`}
-                isDisabled={false}
+                size="lg"
+                className="rounded-none py-6 px-8 text-base"
+                asChild
               >
-                View This Stay
+                <Link href={`/properties/${propertySlug}/rooms/${room.slug}`}>
+                  View This Stay
+                </Link>
               </Button>
             </div>
           </PropertyAndRoomWrapper>

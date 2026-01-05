@@ -3,6 +3,8 @@ import clsx from "clsx";
 import Link from "next/link";
 
 import { usePathname } from "next/navigation";
+import { signOutAction } from "../_lib/actions";
+import { Button } from "@/components/ui/button";
 
 const ProfileSidebar = () => {
   const path = usePathname();
@@ -12,8 +14,8 @@ const ProfileSidebar = () => {
         <Link
           href="/account"
           className={clsx(
-            "text-foreground dark:hover:bg-card/60 hover:bg-background-alt transition-all p-4",
-            path === "/account" && "dark:bg-card/40 bg-card"
+            "text-foreground hover:bg-card/60 transition-all p-4",
+            path === "/account" && "bg-card/60"
           )}
         >
           Profile Settings
@@ -21,19 +23,21 @@ const ProfileSidebar = () => {
         <Link
           href="/account/reservations"
           className={clsx(
-            "text-foreground dark:hover:bg-card/60 hover:bg-background-alt transition-all p-4",
-            path === "/account/reservations" && "dark:bg-card/40 bg-card"
+            "text-foreground hover:bg-card/60 transition-all p-4",
+            path === "/account/reservations" && "bg-card/60"
           )}
         >
           Reservations
         </Link>
 
-        <Link
-          href="#"
-          className="text-rose-500 hover:bg-rose-900 hover:text-foreground transition-colors p-4"
-        >
-          Sign Out
-        </Link>
+        <form action={signOutAction}>
+          <Button
+            variant="destructive"
+            className="rounded-none w-full justify-start bg-background cursor-pointer py-6"
+          >
+            Sign Out
+          </Button>
+        </form>
       </nav>
     </aside>
   );
