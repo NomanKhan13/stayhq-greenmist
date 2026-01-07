@@ -1,7 +1,6 @@
-import Link from "next/link";
 import { auth } from "../_lib/auth";
 import { getGuestById } from "../_lib/users";
-import { format } from "date-fns";
+import { PersonalInformation } from "../_components/profile-information";
 
 export default async function Account() {
   // // Mock user data
@@ -19,40 +18,18 @@ export default async function Account() {
 
   const user = session?.user;
   const guest = await getGuestById(user?.guest);
-  const memberSince = format(guest.createdAt, "MMM dd yyyy");
-  console.log(user);
+  const res = await fetch("https://restcountries.com/v3.1/all?fields=name");
+  const countries = await res.json();
+  const countriesReqFields = countries.map((c) => ({
+    label: c.name.common,
+    value: c.name.common,
+  }));
+
   return (
     <section id="profile" className="space-y-8">
       <div>
         <h2 className="text-2xl mb-6">Profile Information</h2>
-        <div className="space-y-6">
-          <div className="flex justify-between items-start">
-            <div>
-              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
-                Full Name
-              </p>
-              <p className="text-foreground">{user.name || user.fullName}</p>
-            </div>
-          </div>
-          <div className="pt-4 border-t border-border/60">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
-              Email
-            </p>
-            <p className="text-foreground">{user.email}</p>
-          </div>
-          {/* <div className="pt-4 border-t border-border/60">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
-              Phone
-            </p>
-            <p className="text-foreground">{user.phone}</p>
-          </div> */}
-          <div className="pt-4 border-t border-muted">
-            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
-              Member Since
-            </p>
-            <p className="text-foreground">{memberSince}</p>
-          </div>
-        </div>
+        <PersonalInformation guest={guest} countries={countriesReqFields} />
       </div>
     </section>
   );

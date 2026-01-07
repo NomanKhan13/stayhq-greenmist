@@ -42,3 +42,42 @@ export async function createGuest(newGuest: guestProp) {
 
   return guest;
 }
+
+export async function getGuestReservationsById(guestId: string) {
+  const { data: reservations, error } = await supabase
+    .from("bookings")
+    .select("*, roomType:roomTypeId(name, properties:propertyId(name))")
+    .eq("guestId", guestId);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Bookings could not get loaded");
+  }
+  return reservations;
+}
+
+export async function updateProfile(newData, guestId) {
+  const { error } = await supabase
+    .from("guests")
+    .update(newData)
+    .eq("id", guestId)
+    .select()
+    .single();
+  if (error) throw new Error("Profile could not be updated");
+
+  return true;
+}
+
+export async function updateReservation(newData, reservationId) {
+  const { data, error } = await supabase
+    .from("reservations")
+    .update(newData)
+    .eq("id", reservationId)
+    .select()
+    .single();
+
+  console.log(data);
+  if (error) throw new Error("Booking could not be updated");
+
+  return true;
+}

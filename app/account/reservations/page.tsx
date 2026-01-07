@@ -1,3 +1,7 @@
+import { auth } from "@/app/_lib/auth";
+import { getGuestReservationsById } from "@/app/_lib/users";
+import { format } from "date-fns";
+
 const reservations = [
   {
     id: 1,
@@ -33,7 +37,11 @@ const reservations = [
   },
 ];
 
-const page = () => {
+const page = async () => {
+  const session = await auth();
+  const reservations = await getGuestReservationsById(session?.user?.guest);
+  console.log(reservations);
+
   return (
     <section id="upcoming" className="space-y-8">
       <h2 className="font-serif text-2xl font-light tracking-tight">
@@ -51,7 +59,7 @@ const page = () => {
                   Property
                 </p>
                 <h3 className="font-serif text-lg font-light text-foreground">
-                  {reservation.property}
+                  {reservation.roomType.properties.name}
                 </h3>
               </div>
               <span className="text-xs px-2 py-1 bg-accent text-accent-foreground">
@@ -63,20 +71,24 @@ const page = () => {
                 <p className="text-xs uppercase tracking-widest text-secondary-foreground/90 mb-1">
                   Check-in
                 </p>
-                <p className="text-foreground">{reservation.checkIn}</p>
+                <p className="text-foreground">
+                  {format(reservation.startDate, "EEE MMM dd yyyy")}
+                </p>
               </div>
               <div>
                 <p className="text-xs uppercase tracking-widest text-secondary-foreground/90 mb-1">
                   Check-out
                 </p>
-                <p className="text-foreground">{reservation.checkOut}</p>
+                <p className="text-foreground">
+                  {format(reservation.endDate, "EEE MMM dd yyyy")}
+                </p>
               </div>
             </div>
             <div className="pt-4 border-t border-secondary">
               <p className="text-xs uppercase tracking-widest text-secondary-foreground/90 mb-1">
                 Room Type
               </p>
-              <p className="text-foreground">{reservation.roomType}</p>
+              <p className="text-foreground">{reservation.roomType.name}</p>
             </div>
           </div>
         ))}
